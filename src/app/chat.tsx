@@ -2,7 +2,7 @@
 import { useState } from 'react';
 
 export default function Chat() {
-  const [messages, setMessages] = useState([]);
+const [messages, setMessages] = useState<{ role: string; content: string }[]>([]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -23,7 +23,7 @@ export default function Chat() {
       const data = await res.json();
       const botReply = { role: 'assistant', content: data.reply };
       setMessages((prev) => [...prev, botReply]);
-    } catch (err) {
+    } catch  {
       setMessages((prev) => [...prev, { role: 'assistant', content: '⚠️ Error processing request.' }]);
     } finally {
       setLoading(false);
