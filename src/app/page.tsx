@@ -21,7 +21,7 @@ export default function Page() {
 
   return (
     <main style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
-      <h1>🧠 Oracle Unbound: Sophia Chat</h1>
+      <h1> Oracle Unbound: Sophia Chat</h1>
 
       <textarea
         value={message}
@@ -47,10 +47,11 @@ export default function Page() {
       </button>
 
       {response && (
-        <div style={{ marginTop: '2rem', backgroundColor: '#f5f5f5', padding: '1rem' }}>
-          <strong>Sophia replies:</strong>
-          <p>{response}</p>
-        </div>
+        <div className="response">
+        <strong>Sophia replies:</strong>
+        <p>{response}</p>
+      </div>
+      
       )}
     </main>
   );
