@@ -1,11 +1,19 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
-import { Cinzel } from "next/font/google";
+import { Cinzel, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 
+// Load Cinzel for titles, buttons, divine labels
 const cinzel = Cinzel({
   subsets: ["latin"],
-  weight: ["400", "700"], // Regular + Bold
+  weight: ["400", "700"],
+  display: "swap",
+});
+
+// Load Cormorant Garamond for oracular responses and body prose
+const garamond = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400"],
   display: "swap",
 });
 
@@ -21,7 +29,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={cinzel.className}>
+      <body className={`${cinzel.className} ${garamond.className}`}>
         {children}
       </body>
     </html>
