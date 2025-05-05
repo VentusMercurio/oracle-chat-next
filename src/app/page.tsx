@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 export default function Page() {
   const [message, setMessage] = useState('');
-  const [response, setResponse] = useState('');
+  const [chatLog, setChatLog] = useState<{ user: string; reply: string }[]>([]);
 
   async function sendMessage() {
     if (!message.trim()) return;
@@ -16,7 +16,8 @@ export default function Page() {
     });
 
     const data = await res.json();
-    setResponse(data.reply);
+    setChatLog([...chatLog, { user: message, reply: data.reply }]);
+    setMessage('');
   }
 
   return (
@@ -39,20 +40,20 @@ export default function Page() {
         </div>
 
         <h1
-  style={{
-    fontFamily: "'Cinzel', serif",
-    fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    lineHeight: '1.4',
-    marginTop: '1.5rem',
-    color: '#ffffff',
-    textShadow: '0 0 10px #ff00ff88'
-  }}
->
-  Speak, and the Oracle shall answer. <br />
-  Your truth lies hidden until it is called forth.
-</h1>
+          style={{
+            fontFamily: "'Cinzel', serif",
+            fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            lineHeight: '1.4',
+            marginTop: '1.5rem',
+            color: '#ffffff',
+            textShadow: '0 0 10px #ff00ff88'
+          }}
+        >
+          Speak, and the Oracle shall answer. <br />
+          Your truth lies hidden until it is called forth.
+        </h1>
 
         <textarea
           value={message}
@@ -102,43 +103,71 @@ export default function Page() {
           </button>
         </div>
 
-        {response && (
-          <div
-          key={response}
-            className="response fade-in"
-            style={{
-              marginTop: '2rem',
-              fontFamily: "'Cormorant Garamond', serif",
-              fontSize: '1.25rem',
-              lineHeight: '1.7',
-              color: '#ffffff',
-              textShadow: '0 0 8px #ff00ff33',
-              padding: '1.5rem',
-              background: 'rgba(255, 255, 255, 0.05)',
-              borderRadius: '12px',
-              border: '1px solid #ff00ff22',
-              boxShadow: '0 0 20px #ff00ff22',
-              maxWidth: '800px',
-              marginLeft: 'auto',
-              marginRight: 'auto'
-            }}
-          >
-            <strong
-              style={{
-                display: 'block',
-                fontSize: '1.1rem',
-                fontFamily: "'Cinzel', serif",
-                marginBottom: '0.5rem',
-                color: '#ffccff',
-                textTransform: 'uppercase',
-                letterSpacing: '1px'
-              }}
-            >
-              Sophia replies:
-            </strong>
-            <p className="shimmer">{response}</p>
-            </div>
-        )}
+        <div style={{ marginTop: '2rem' }}>
+  {chatLog.map((entry, index) => (
+    <div
+      key={index}
+      style={{
+        marginBottom: '1.5rem',
+        padding: '1.25rem',
+        background: 'rgba(255,255,255,0.05)',
+        borderRadius: '12px',
+        border: '1px solid #ff00ff22',
+        boxShadow: '0 0 20px #ff00ff22',
+        color: '#fff',
+        fontFamily: "'Cormorant Garamond', serif",
+        maxWidth: '800px',
+        marginLeft: 'auto',
+        marginRight: 'auto'
+      }}
+    >
+<p
+  style={{
+    marginBottom: '0.5rem',
+    fontSize: '1rem',
+    fontFamily: "'Cinzel', serif",
+    fontWeight: 'bold',
+    color: '#ffb6ff',
+    textShadow: '0 0 6px #ff99ff33',
+    textTransform: 'uppercase',
+    letterSpacing: '0.5px'
+  }}
+>
+  You: <span style={{ fontWeight: 'normal', textTransform: 'none', color: '#ffffff', fontFamily: "'Cinzel', serif" }}>
+    {entry.user}
+  </span>
+</p>
+      <p style={{ marginBottom: '0.25rem' }}>
+        <strong
+          style={{
+            display: 'block',
+            fontSize: '1.1rem',
+            fontFamily: "'Cinzel', serif",
+            color: '#ffccff',
+            textTransform: 'uppercase',
+            letterSpacing: '1px',
+            marginBottom: '0.25rem',
+            textShadow: '0 0 6px #ff99ff55'
+          }}
+        >
+          Sophia replies:
+        </strong>
+        <span
+          className="shimmer"
+          style={{
+            fontSize: '1.1rem',
+            lineHeight: '1.6',
+            display: 'block',
+            color: '#ffffff',
+            textShadow: '0 0 6px #ffffff11'
+          }}
+        >
+          {entry.reply}
+        </span>
+      </p>
+    </div>
+  ))}
+</div>
       </main>
     </>
   );
