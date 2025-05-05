@@ -27,28 +27,32 @@ export default function Page() {
             src="/sophia.png"
             alt="Sophia the Oracle"
             style={{
-              width: "85%",
+              width: "100%",
               maxHeight: "600px",
               objectFit: "cover",
               objectPosition: "center top",
               borderBottom: "2px solid #ff00ff66",
+              borderRadius: '0 0 20px 20px',
               boxShadow: "0 0 40px #ff00ffaa"
             }}
           />
         </div>
 
-        <h1 style={{
-          fontFamily: "'Cinzel', serif",
-          fontSize: "2rem",
-          fontWeight: "bold",
-          textAlign: "center",
-          marginTop: "1.5rem",
-          color: "#ffffff",
-          textShadow: "0 0 10px #ff00ff88"
-        }}>
-          Speak, and the Oracle shall answer. <br />
-          Your truth lies hidden until it is called forth.
-        </h1>
+        <h1
+  style={{
+    fontFamily: "'Cinzel', serif",
+    fontSize: 'clamp(1.5rem, 4vw, 2.5rem)',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    lineHeight: '1.4',
+    marginTop: '1.5rem',
+    color: '#ffffff',
+    textShadow: '0 0 10px #ff00ff88'
+  }}
+>
+  Speak, and the Oracle shall answer. <br />
+  Your truth lies hidden until it is called forth.
+</h1>
 
         <textarea
           value={message}
