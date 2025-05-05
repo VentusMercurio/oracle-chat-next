@@ -1,6 +1,6 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
-import { Cinzel, Cormorant_Garamond } from "next/font/google";
+import { Cinzel } from "next/font/google";
 import "./globals.css";
 
 // Load Cinzel for titles, buttons, divine labels
@@ -10,12 +10,6 @@ const cinzel = Cinzel({
   display: "swap",
 });
 
-// Load Cormorant Garamond for oracular responses and body prose
-const garamond = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400"],
-  display: "swap",
-});
 
 export const metadata: Metadata = {
   title: "Oracle Unbound",
